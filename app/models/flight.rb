@@ -1,11 +1,14 @@
 class Flight < ApplicationRecord
-    after_initialize :calculate_duration
+    before_create :calculate_duration
 
     belongs_to :from_airport, class_name: "Airport"
     belongs_to :to_airport, class_name: "Airport"
 
     private
     def calculate_duration
-        self.update_attribute(:duration, (Time.at(self.arrival - self.departure).utc.strftime("%H:%M:%S")))
+        duration = Time.at(self.arrival - self.departure)
+        self.duration = duration.utc.strftime("%H:%M:%S")
     end
 end
+
+# May need to refine duration calculation again

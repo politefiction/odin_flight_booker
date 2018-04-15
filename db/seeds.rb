@@ -9,3 +9,14 @@
 10.times do
     Airport.create(name: Array.new(3){ [*"A".."Z"].sample }.join)
 end
+
+20.times do
+    time = rand(Time.now..2.weeks.from_now)
+    Flight.create(
+        departure: time, 
+        arrival: (time + 3.hours), 
+        from_airport: Airport.find(rand(1..5)), 
+        to_airport: Airport.find(rand(6..10))
+    )
+end
+
