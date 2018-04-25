@@ -1,3 +1,9 @@
 // Place all the styles related to the Flights controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+#flight-list li {
+    display: inline-block;
+    padding: 5px 18px 5px 18px;
+}

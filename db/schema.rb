@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180410133533) do
+ActiveRecord::Schema.define(version: 20180422144319) do
 
   create_table "airports", force: :cascade do |t|
     t.string "name"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20180410133533) do
     t.integer "from_airport_id"
     t.integer "to_airport_id"
     t.float "duration"
+    t.integer "num_seats", default: 250
     t.index ["from_airport_id"], name: "index_flights_on_from_airport_id"
     t.index ["to_airport_id"], name: "index_flights_on_to_airport_id"
   end

@@ -1,14 +1,32 @@
 <h1>Flights#index</h1>
-<p>Find me in app/views/flights/index.html.erb</p>
+<p>Attempt to book flights here.</p>
 
-<%= form_for @flight do |f| %>
-    <%= f.label "From" %>
-    <%= f.select :from_airport, options_for_select(@airports.map { |airport| airport.name } ) %>
+<%= form_tag root_url, :method => 'get' do %>
+    <%= label_tag 'From' %>
+    <%= select_tag :from_airport, options_for_select(@airports[0..2].map { |airport| airport.name }) %>
 
-    <%= f.label "To" %>
-    <%= f.select :to_airport, options_for_select(@airports.map { |airport| airport.name } ) %><br />
+    <%= label_tag 'To' %>
+    <%= select_tag :to_airport, options_for_select(@airports[3..5].map { |airport| airport.name }) %><br />
 
-    <%= f.label "Departure Date" %>
-    <%= f.select :departure, options_for_select(@flights.order("departure").map { |flight| flight.departure.strftime("%m/%d/%Y") }.uniq ) %>
+    <%= label_tag 'Departure Date' %>
+    <%= select_tag :departure, options_for_select(@flights.order("departure").map { |flight| flight.departure.strftime("%m/%d/%Y") }.uniq) %><br />
 
+    <%= label_tag 'Number of Passengers' %>
+    <%= select_tag :num_passengers, options_for_select((1..4).map { |num| num }) %><br />
+
+    <%= submit_tag "See flights" %>
+<% end %>
+
+<% if @flight_choices %>
+    <div class="list-container">
+        <% @flight_choices.each do |flight| %>
+            <ul id="flight-list">
+                <li>Flight #<%= flight.id %></li>
+                <li>From: <%= flight.from_airport.name %></li>
+                <li>To: <%= flight.to_airport.name %></li>
+                <li>Takeoff: <%= flight.departure.strftime("%b %d, %Y %I:%M%P") %></li>
+                <li>Landing: <%= flight.arrival.strftime("%b %d, %Y %I:%M%P") %></li>
+            </ul>
+        <% end %>
+    </div>
 <% end %>
