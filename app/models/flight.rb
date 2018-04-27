@@ -4,8 +4,8 @@ class Flight < ApplicationRecord
 
     belongs_to :from_airport, class_name: "Airport"
     belongs_to :to_airport, class_name: "Airport"
-    # has_many :bookings
-    # has_many :passengers, through: :bookings
+    has_many :bookings
+    has_many :passengers, through: :bookings
     # accepts_nested_attributes_for :bookings, limit: 250? idk
 
     def self.search(from_airport, to_airport, departure)
@@ -18,13 +18,11 @@ class Flight < ApplicationRecord
     private
     def calculate_duration
         duration = Time.at(self.arrival - self.departure)
-        self.duration = duration.utc.strftime("%H:%M:%S")
+        self.duration = (duration.to_f/3600).round(2)
     end
 
     def self.convert_to_datetime(d)
-        time_array = d.split("/")
-        time_array.insert(0, time_array.delete_at(2)).join("-")
+        date_array = d.split("/")
+        date_array.insert(0, date_array.delete_at(2)).join("-")
     end
 end
-
-# May need to refine duration calculation again

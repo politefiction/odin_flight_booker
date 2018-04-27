@@ -8,9 +8,5 @@ class FlightsController < ApplicationController
       @flight_choices = Flight.search(params[:from_airport], params[:to_airport], params[:departure])
     end
   end
-
-  private
-  def flight_params
-    params.require(:flight).permit(:from_airport, :to_airport, :departure)
-  end
+  
 end

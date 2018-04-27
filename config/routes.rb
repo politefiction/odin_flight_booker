@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'flights#index'
   resources :flights
+  resources :bookings
 
   #post '/flights/:id', to 'flights#index'
 

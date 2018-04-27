@@ -11,10 +11,10 @@
 end
 
 50.times do
-    time = rand(Time.now..2.weeks.from_now)
+    time = rand(Time.now..1.week.from_now)
     Flight.create(
         departure: time, 
-        arrival: (time + 3.hours), 
+        arrival: (time + rand(60..180).minutes), 
         from_airport: Airport.find(rand(1..3)), 
         to_airport: Airport.find(rand(4..6))
     )

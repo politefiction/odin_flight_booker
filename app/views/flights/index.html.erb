@@ -19,14 +19,23 @@
 
 <% if @flight_choices %>
     <div class="list-container">
-        <% @flight_choices.each do |flight| %>
-            <ul id="flight-list">
-                <li>Flight #<%= flight.id %></li>
-                <li>From: <%= flight.from_airport.name %></li>
-                <li>To: <%= flight.to_airport.name %></li>
-                <li>Takeoff: <%= flight.departure.strftime("%b %d, %Y %I:%M%P") %></li>
-                <li>Landing: <%= flight.arrival.strftime("%b %d, %Y %I:%M%P") %></li>
-            </ul>
+        <% unless @flight_choices.empty? %>
+            <%= form_tag(new_booking_path, {method: :get}) do %>
+                <% @flight_choices.each do |flight| %>
+                    <ul id="flight-list">
+                        <%= radio_button_tag 'flight_id', flight.id %>
+                        <li>Flight #<%= flight.id %></li>
+                        <li>From: <%= flight.from_airport.name %></li>
+                        <li>To: <%= flight.to_airport.name %></li>
+                        <li>Takeoff: <%= flight.departure.strftime("%b %d, %Y %I:%M%P") %></li>
+                        <li>Landing: <%= flight.arrival.strftime("%b %d, %Y %I:%M%P") %></li>
+                        <li>Duration: <%= flight.duration %> hrs</li>
+                    </ul>
+                <% end %>
+                <%= submit_tag 'Select Flight' %>
+            <% end %>
+        <% else %>
+            <p>Sorry, no flights are available on this date.</p>
         <% end %>
     </div>
 <% end %>

@@ -1,0 +1,13 @@
+<h1>Bookings#new</h1>
+<p>Find me in app/views/bookings/new.html.erb</p>
+<% if params[:flight_id] %>
+    <p>Page to book Flight #<%= @flight.id %></p>
+    <p>Flight Details:</p>
+    <ul>
+        <li>Date of flight: <%= @flight.departure.strftime("%b %d, %Y") %></li>
+        <li>Takeoff from: <%= @flight.from_airport.name %> at <%= @flight.departure.strftime("%I:%M%p") %></li>
+        <li>Landing at: <%= @flight.to_airport.name %> at <%= @flight.arrival.strftime("%I:%M%p") %></li>
+        <li>Duration of flight: <%= @flight.duration %> hrs</li>
+        <li>Available seats: <%= @flight.num_seats %></li>
+    </ul>
+<% end %>
