@@ -6,7 +6,6 @@ class Flight < ApplicationRecord
     belongs_to :to_airport, class_name: "Airport"
     has_many :bookings
     has_many :passengers, through: :bookings
-    # accepts_nested_attributes_for :bookings, limit: 250? idk
 
     def self.search(from_airport, to_airport, departure)
         ap_from = Airport.find_by(name: "#{from_airport}").id

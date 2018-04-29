@@ -1,20 +1,20 @@
-<h1>Flights#index</h1>
-<p>Attempt to book flights here.</p>
+<h1>Flight Search</h1>
+<p>Search for flights here.</p>
 
 <%= form_tag root_url, :method => 'get' do %>
     <%= label_tag 'From' %>
-    <%= select_tag :from_airport, options_for_select(@airports[0..2].map { |airport| airport.name }) %>
+    <%= select_tag :from_airport, options_for_select(@airports[0..2].map { |airport| airport.name }), class: "dropdown" %>
 
     <%= label_tag 'To' %>
-    <%= select_tag :to_airport, options_for_select(@airports[3..5].map { |airport| airport.name }) %><br />
+    <%= select_tag :to_airport, options_for_select(@airports[3..5].map { |airport| airport.name }), class: "dropdown" %><br />
 
     <%= label_tag 'Departure Date' %>
-    <%= select_tag :departure, options_for_select(@flights.order("departure").map { |flight| flight.departure.strftime("%m/%d/%Y") }.uniq) %><br />
+    <%= select_tag :departure, options_for_select(@flights.order("departure").map { |flight| flight.departure.strftime("%m/%d/%Y") }.uniq), class: "dropdown" %><br />
 
     <%= label_tag 'Number of Passengers' %>
-    <%= select_tag :num_passengers, options_for_select((1..4).map { |num| num }) %><br />
+    <%= select_tag :num_passengers, options_for_select((1..4).map { |num| num }), class: "dropdown" %><br />
 
-    <%= submit_tag "See flights" %>
+    <%= submit_tag "See flights", class: "button" %>
 <% end %>
 
 <% if @flight_choices %>
@@ -24,6 +24,7 @@
                 <% @flight_choices.each do |flight| %>
                     <ul id="flight-list">
                         <%= radio_button_tag 'flight_id', flight.id %>
+                        <%= hidden_field_tag(:num_passengers, params[:num_passengers]) %>
                         <li>Flight #<%= flight.id %></li>
                         <li>From: <%= flight.from_airport.name %></li>
                         <li>To: <%= flight.to_airport.name %></li>

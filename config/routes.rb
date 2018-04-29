@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root 'flights#index'
   resources :flights
-  resources :bookings
+  resources :bookings do
+    get 'passengers', on: :member
+  end
 
   #post '/flights/:id', to 'flights#index'
 
