@@ -17,7 +17,7 @@ class BookingsController < ApplicationController
       num_passengers = @booking.flight.passengers.count
       @booking.flight.update_attribute("num_seats", (num_seats - num_passengers))
       flash[:success] = "Flight booked."
-      render 'show'
+      redirect_to booking_path(@booking.id)
     else
       flash[:danger] = "Booking unsuccessful. Please try again."
       render 'new'

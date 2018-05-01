@@ -1,24 +1,27 @@
 <h1>Flight Search</h1>
 <p>Search for flights here.</p>
 
+<div class="search-form">
 <%= form_tag root_url, :method => 'get' do %>
-    <%= label_tag 'From' %>
+    <%= label_tag 'From', nil, class: "search-label" %>
     <%= select_tag :from_airport, options_for_select(@airports[0..2].map { |airport| airport.name }), class: "dropdown" %>
 
-    <%= label_tag 'To' %>
+    <%= label_tag 'To', nil, class: "search-label" %>
     <%= select_tag :to_airport, options_for_select(@airports[3..5].map { |airport| airport.name }), class: "dropdown" %><br />
 
-    <%= label_tag 'Departure Date' %>
+    <%= label_tag 'Departure Date', nil, class: "search-label" %>
     <%= select_tag :departure, options_for_select(@flights.order("departure").map { |flight| flight.departure.strftime("%m/%d/%Y") }.uniq), class: "dropdown" %><br />
 
-    <%= label_tag 'Number of Passengers' %>
+    <%= label_tag 'Number of Passengers', nil, class: "search-label" %>
     <%= select_tag :num_passengers, options_for_select((1..4).map { |num| num }), class: "dropdown" %><br />
 
     <%= submit_tag "See flights", class: "button" %>
 <% end %>
+</div>
 
 <% if @flight_choices %>
-    <div class="list-container">
+    <h2>Available Flights:</h2>
+    <div id="results-container">
         <% unless @flight_choices.empty? %>
             <%= form_tag(new_booking_path, {method: :get}) do %>
                 <% @flight_choices.each do |flight| %>
@@ -33,7 +36,7 @@
                         <li>Duration: <%= flight.duration %> hrs</li>
                     </ul>
                 <% end %>
-                <%= submit_tag 'Select Flight' %>
+                <%= submit_tag 'Select Flight', class: "button" %>
             <% end %>
         <% else %>
             <p>Sorry, no flights are available on this date.</p>

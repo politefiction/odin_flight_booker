@@ -2,29 +2,33 @@
 
 <h1>Book Your Flight</h1>
 <% if params[:flight_id] %>
-    <p>Book Flight #<%= @flight.id %></p>
-    <p>Flight Details:</p>
-    <ul>
-        <li>Date: <%= @flight.departure.strftime("%b %d, %Y") %></li>
-        <li>Takeoff from: <%= @flight.from_airport.name %> at <%= @flight.departure.strftime("%I:%M%P") %></li>
-        <li>Landing at: <%= @flight.to_airport.name %> at <%= @flight.arrival.strftime("%I:%M%P") %></li>
-        <li>Duration of flight: <%= @flight.duration %> hrs</li>
-        <li>Available seats: <%= @flight.num_seats %></li>
-    </ul>
+    <h2>Book Flight #<%= @flight.id %></h2>
+    <div id="flight-details">
+        <p>Flight Details:</p>
+        <ul>
+            <li>Date: <%= @flight.departure.strftime("%b %d, %Y") %></li>
+            <li>Takeoff from: <%= @flight.from_airport.name %> at <%= @flight.departure.strftime("%I:%M%P") %></li>
+            <li>Landing at: <%= @flight.to_airport.name %> at <%= @flight.arrival.strftime("%I:%M%P") %></li>
+            <li>Duration of flight: <%= @flight.duration %> hrs</li>
+            <li>Available seats: <%= @flight.num_seats %></li>
+        </ul>
+    </div>
     
-    <p>Please enter passenger information:</p>
+    <h3>Please enter passenger information:</h3>
     <%= form_for @booking do |f| %>
         <%= f.hidden_field :flight_id, value: @flight.id %>
         <% (params[:num_passengers].to_i).times do %>
             <%= f.fields_for :passengers do |p| %>
-                <%= p.label :name %>
+                <div id="passenger-info">
+                <%= p.label :name, nil, class: "booking-label" %>
                 <%= p.text_field :name %><br />
 
-                <%= p.label :email %>
+                <%= p.label :email, nil, class: "booking-label" %>
                 <%= p.email_field :email %><br />
+                </div>
             <% end %><br />
         <% end %>
-        <%= f.submit "Book Flight" %>
+        <%= f.submit "Book Flight", class: "button" %>
     <% end %>
 
 <% end %>

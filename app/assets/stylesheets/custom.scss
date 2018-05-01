@@ -1,22 +1,16 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
-}
-
-
-/* buttons and dropdowns */
-
-.button {
     font-size: 14px;
-    width: 100px;
-    height: 30px;
+    background-color: #05135b;
     color: white;
-    background-color: rgb(96, 179, 170);
-    margin-top: 10px;
 }
 
-.dropdown {
-    padding-right: 10px;
-    height: 20px;
+a:link {
+    color: white;
+}
+
+a:visited {
+    color: white;
 }
 
 /* home */
@@ -26,9 +20,90 @@ body {
     float: right;
 }
 
+
+/* search form */
+
+.search-form {
+    background-color: white;
+    color: black;
+    border-radius: 25px;
+    width: 275px;
+    height: 125px;
+    padding: 20px 15px;
+    margin-bottom: 50px;
+}
+
+.search-label {
+    margin: 10px 5px 10px 10px;
+}
+
+/* buttons and dropdowns */
+
+.button {
+    font-size: 14px;
+    width: 100px;
+    height: 30px;
+    color: white;
+    background-color:#d6b22f;
+    margin-top: 13px;
+}
+
+.dropdown {
+    padding-right: 10px;
+    height: 20px;
+    margin-top: 5px;
+    background-color: white;
+}
+
 /* flights */
 
 #flight-list li {
     display: inline-block;
     padding: 5px 13px 5px 13px;
+}
+
+#results-container {
+    background-color: white;
+    color: black;
+    border-radius: 20px;
+    form, p {
+        padding: 20px 0;
+        input.button {
+            margin-left: 13px;
+        }
+    }
+}
+
+/* booking page */
+
+#flight-details {
+    background-color: white;
+    color: black;
+    width: 275px;
+    height: 150px;
+    padding: 5px 15px 0 25px;
+    margin-bottom: 50px;
+    border-radius: 25px;
+}
+
+#passenger-info {
+    display: inline-block;
+    margin: 15px 0;
+}
+
+.booking-label {
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+/* booking details page */
+
+#passenger-list {
+    background-color: white;
+    color: black;
+    width: 275px;
+    height: 75px;
+    padding: 5px 15px 0 25px;
+    margin-bottom: 50px;
+    border-radius: 25px;
 }
