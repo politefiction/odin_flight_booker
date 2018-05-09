@@ -16,6 +16,7 @@ class BookingsController < ApplicationController
       num_seats = @booking.flight.num_seats
       num_passengers = @booking.flight.passengers.count
       @booking.flight.update_attribute("num_seats", (num_seats - num_passengers))
+      PassengerMailer.with(booking: @booking).thanks_email.deliver_now
       flash[:success] = "Flight booked."
       redirect_to booking_path(@booking.id)
     else
@@ -31,6 +32,5 @@ class BookingsController < ApplicationController
   private
   def booking_params
     params.require(:booking).permit(:flight_id, :passengers_attributes => [:name, :email])
-    # num_seats is still 250 as well
   end
 end
