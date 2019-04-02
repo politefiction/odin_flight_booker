@@ -1,0 +1,12 @@
+Thank you for booking with Odin Flight Booker!
+
+You have successfully booked your flight. Here are the details for Flight #<%= @booking.flight.id %>:
+
+
+Departure: <%= "#{@booking.flight.departure.strftime("%m/%d/%Y")} from #{@booking.flight.from_airport.name}" %>
+Arrival: <%= "#{@booking.flight.arrival.strftime("%m/%d/%Y")} at #{@booking.flight.to_airport.name}" %>
+
+
+Have a safe trip!
+
+Odin Booking Team
